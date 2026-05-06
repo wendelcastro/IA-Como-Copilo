@@ -5,7 +5,8 @@ import {
   Terminal, Award, ChevronRight, CheckCircle2, 
   Lock, Play, RefreshCw, Search, FileText, 
   AlertTriangle, ThumbsUp, ThumbsDown, Share2, Download,
-  ArrowRight, Info, Check, X, Star, Instagram, Linkedin, Globe, MessageSquare, Rocket
+  ArrowRight, Info, Check, X, Star, Instagram, Linkedin, Globe, MessageSquare, Rocket,
+  ExternalLink, ImageIcon, Code2, Library
 } from 'lucide-react';
 
 // --- TYPES & CONSTANTS ---
@@ -1674,21 +1675,96 @@ const Phase7 = ({ completedPhases, passedAllQuizzes, scores }: { completedPhases
         )}
       </Card>
 
-      <Card className="animate-in slide-in-from-bottom-8 delay-700">
-        <h3 className="text-xl font-bold text-[#4FC3F7] mb-4 flex items-center gap-2">
-          <Terminal className="w-5 h-5" /> Seu Kit de Ferramentas
+      <Card className="animate-in slide-in-from-bottom-8 delay-700 bg-[#0A1628]/50 border-[#1E3A5F]">
+        <h3 className="text-xl font-bold text-[#4FC3F7] mb-6 flex items-center gap-2">
+          <Terminal className="w-5 h-5" /> Seu Kit de Ferramentas de Elite
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            { name: "ChatGPT", desc: "Bom para raciocínio geral, código e tarefas do dia a dia.", color: "text-green-400" },
-            { name: "Claude", desc: "Excelente para textos longos, análise de documentos e escrita natural.", color: "text-orange-400" },
-            { name: "Gemini", desc: "Integração com Google Workspace e pesquisa em tempo real.", color: "text-blue-400" },
-            { name: "Perplexity", desc: "O melhor para pesquisa com fontes reais e citações.", color: "text-cyan-400" }
+            { 
+              category: "Escrita longa:", 
+              name: "Claude", 
+              desc: "Escrita fluída e natural para textos extensos.", 
+              color: "text-orange-400", 
+              link: "https://claude.ai",
+              icon: FileText
+            },
+            { 
+              category: "Imagens com texto:", 
+              name: "DALL-E 3 (ChatGPT)", 
+              desc: "Precisão em gerar imagens com palavras e frases.", 
+              color: "text-green-500", 
+              link: "https://chatgpt.com",
+              icon: ImageIcon
+            },
+            { 
+              category: "Edição visual:", 
+              name: "Nano Banana 2", 
+              desc: "Especialista em manipulação e edição visual avançada.", 
+              color: "text-yellow-400", 
+              link: "#",
+              icon: Sparkles
+            },
+            { 
+              category: "Pesquisa com fontes:", 
+              name: "Perplexity", 
+              desc: "Busca com citações (ver Gemini Deep Research).", 
+              color: "text-cyan-400", 
+              link: "https://perplexity.ai",
+              icon: Search
+            },
+            { 
+              category: "Código profissional:", 
+              name: "Claude (ou Gemini 1.5)", 
+              desc: "Melhor para lógica, depuração e arquitetura.", 
+              color: "text-blue-500", 
+              link: "https://claude.ai",
+              icon: Code2
+            },
+            { 
+              category: "Planilhas e CSV:", 
+              name: "ChatGPT (C. Interpreter)", 
+              desc: "Análise profunda de dados e arquivos.", 
+              color: "text-emerald-500", 
+              link: "https://chatgpt.com",
+              icon: Database
+            },
+            { 
+              category: "Documentos longos:", 
+              name: "Claude (1M tokens)", 
+              desc: "Capacidade massiva para PDFs e base de dados.", 
+              color: "text-orange-300", 
+              link: "https://claude.ai",
+              icon: Library
+            },
+            { 
+              category: "Workspace integrado:", 
+              name: "Gemini / Copilot", 
+              desc: "Conexão com Google Docs e Microsoft Office.", 
+              color: "text-indigo-400", 
+              link: "https://gemini.google.com",
+              icon: Globe
+            },
           ].map((t, i) => (
-            <div key={i} className="p-4 bg-[#0A1628] border border-[#1E3A5F] rounded-lg hover:border-[#4FC3F7]/50 transition-colors group cursor-default">
-              <h4 className={`font-bold ${t.color} group-hover:scale-105 transition-transform origin-left`}>{t.name}</h4>
-              <p className="text-sm text-gray-400 mt-1">{t.desc}</p>
-            </div>
+            <a 
+              key={i} 
+              href={t.link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="p-4 bg-[#112240] border border-[#1E3A5F] rounded-xl hover:border-[#4FC3F7]/50 hover:bg-[#1E3A5F] transition-all group flex items-start gap-4"
+            >
+              <div className={`p-2 rounded-lg bg-[#0A1628] ${t.color} group-hover:scale-110 transition-transform`}>
+                <t.icon className="w-5 h-5" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] uppercase tracking-wider text-gray-500 font-bold">{t.category}</span>
+                  <ExternalLink className="w-3 h-3 text-gray-600 group-hover:text-[#4FC3F7] transition-colors" />
+                </div>
+                <h4 className={`font-bold text-white group-hover:text-[#4FC3F7] transition-colors`}>{t.name}</h4>
+                <p className="text-xs text-gray-400 mt-1 leading-relaxed">{t.desc}</p>
+              </div>
+            </a>
           ))}
         </div>
       </Card>
